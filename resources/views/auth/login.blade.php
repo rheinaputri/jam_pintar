@@ -62,11 +62,18 @@
                         </button>
                     </div>
 
-                    <div class="mt-3 text-center">
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#modalRegister" data-bs-dismiss="modal">
-                            Belum punya akun? <b>Daftar</b>
+                    {{-- Daftar akun --}}
+                    <p class="text-center small mb-0">
+                        Belum punya akun?
+                        <a href="#" 
+                           class="text-decoration-none fw-semibold" 
+                           style="color: #F5A623;"
+                           data-bs-toggle="modal" 
+                           data-bs-target="#modalRegister" 
+                           data-bs-dismiss="modal">
+                            Daftar
                         </a>
-                    </div>
+                    </p>
                 </form>
             </div>
 

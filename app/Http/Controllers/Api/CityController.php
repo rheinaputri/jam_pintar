@@ -24,7 +24,7 @@ class CityController extends Controller
 
         $results = Cache::remember($cacheKey, 60 * 60, function() use ($q) {
             // prefer prefix matches for autocomplete and return compact fields
-            return City::whereRaw('LOWER(name) LIKE ?', [strtolower($q)."%"])
+            return City::whereRaw('LOWER(name) LIKE ?', ['%'.strtolower($q).'%'])
                 ->orderByRaw("CASE WHEN LOWER(name) LIKE ? THEN 0 ELSE 1 END", [strtolower($q).'%'])
                 ->limit(10)
                 ->get(['id','name','province']);
@@ -44,13 +44,14 @@ class CityController extends Controller
             return response()->json([], 200);
         }
 
-        $results = City::where('name', 'like', "%{$q}%")
+        $results = City::whereRaw('LOWER(name) LIKE ?', ['%'.strtolower($q).'%'])
             ->orderByRaw("CASE WHEN LOWER(name) LIKE ? THEN 0 ELSE 1 END", [strtolower($q).'%'])
             ->limit(10)
             ->get(['id','regency_code','name','type','province','lat','lon'])
             ->map(function($c){
                 return [
                     'id' => $c->id,
+                    'name' => $c->name,
                     'city_name' => $c->name,
                     'province' => $c->province,
                     'regency_code' => $c->regency_code,
