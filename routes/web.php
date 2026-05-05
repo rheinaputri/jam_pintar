@@ -12,8 +12,15 @@ Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    
+    // Registrasi
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+});
+
 
 // ─── Backoffice (admin only) ───────────────────────────────────────────────────
 
