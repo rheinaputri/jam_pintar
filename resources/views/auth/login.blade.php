@@ -36,7 +36,14 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('login') }}">
+                {{-- Tampilkan success message (setelah register) --}}
+                @if (session('success'))
+                    <div class="alert alert-success py-2 small">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                <form method="POST" action="{{ route('auth.login') }}">
                     @csrf
 
                     {{-- email --}}
@@ -107,8 +114,8 @@
     </div>
 </div>
 
-{{-- Buka modal otomatis jika ada error validasi (setelah redirect) --}}
-@if ($errors->any())
+{{-- Buka modal otomatis jika ada error atau success message (setelah redirect) --}}
+@if ($errors->any() || session('success'))
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var modal = new bootstrap.Modal(document.getElementById('modalLogin'));

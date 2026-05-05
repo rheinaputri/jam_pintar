@@ -65,7 +65,7 @@
         </ul>
 
         <div class="mt-auto">
-            <form method="POST" action="{{ route('logout') }}">
+            <form method="POST" action="{{ route('auth.logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-outline-light w-100">
                     <i class="bi bi-box-arrow-left me-2"></i> Logout
