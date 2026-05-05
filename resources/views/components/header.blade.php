@@ -4,8 +4,12 @@
     <div class="ms-auto d-flex align-items-center gap-2">
         @auth
             {{-- Sudah login: tampilkan nama & logout --}}
+            
             {{-- <span class="text-muted small">Halo, {{ auth()->user()->name }}</span>
             <form method="POST" action="{{ route('logout') }}">
+            
+            <span class="text-muted small">Halo, {{ auth()->user()->name }}</span>
+            <form method="POST" action="{{ route('auth.logout') }}">
                 @csrf
                 <button type="submit" class="btn btn-outline-secondary btn-sm">
                     <i class="bi bi-box-arrow-right me-1"></i> Logout

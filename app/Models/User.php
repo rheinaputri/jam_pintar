@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\City;
 
 class User extends Authenticatable
 {
@@ -23,6 +23,7 @@ class User extends Authenticatable
         'email',
         'password',
         'profile_img',
+        'city_id',
         'city',
         'birth_date',
         'gender',
@@ -38,6 +39,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
 
     /**
      * Get the attributes that should be cast.
@@ -56,6 +58,11 @@ class User extends Authenticatable
     public function testAttempts(): HasMany
     {
         return $this->hasMany(TestAttempt::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id');
     }
 
     public function isAdmin(): bool
