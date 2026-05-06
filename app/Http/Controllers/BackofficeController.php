@@ -10,4 +10,9 @@ class BackofficeController extends Controller
     {
         return view('pages.backoffice.index');
     }
+
+    public function question(): View
+    {
+        return view('pages.backoffice.question');
+    }
 }

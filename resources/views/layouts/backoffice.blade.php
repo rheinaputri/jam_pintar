@@ -13,9 +13,8 @@
 
     {{-- font options --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <style>
         *  {
             font-family: 'Poppins', sans-serif;
@@ -23,7 +22,7 @@
         body {
             min-height: 100vh;
             background-color: #f8f9fa;
-            font-family: Poppins, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         #sidebar-admin {
@@ -44,6 +43,36 @@
         #content {
             padding: 24px;
         }
+
+        /* link */
+        /* Sidebar link default */
+        .sidebar-link {
+            transition: all 0.2s ease;
+            font-weight: 400;
+        }
+
+        /* Hover effect */
+        .sidebar-link:hover {
+            font-weight: 700;
+            transform: translateX(2px);
+        }
+
+        /* Hover icon */
+        .sidebar-link:hover i {
+            font-weight: 700;
+        }
+
+        /* Active menu */
+        .active-sidebar {
+            font-weight: 700;
+            background-color: rgba(255,255,255,0.12);
+            border-radius: 10px;
+        }
+
+        /* Active icon */
+        .active-sidebar i {
+            font-weight: 700;
+        }
     </style>
 
     @stack('styles')
@@ -56,12 +85,25 @@
             <i class="bi bi-grid-fill me-2"></i> Backoffice
         </div>
         <ul class="nav flex-column gap-1">
+            {{-- Dashboard --}}
             <li class="nav-item">
-                <a href="{{ route('backoffice.index') }}" class="nav-link text-white">
-                    <i class="bi bi-house me-2"></i> Dashboard
+                <a href="{{ route('backoffice.index') }}"
+                class="nav-link sidebar-link text-white {{ request()->routeIs('backoffice.index') ? 'active-sidebar' : '' }}">
+                    
+                    <i class="bi bi-house me-2"></i>
+                    Dashboard
                 </a>
             </li>
-            {{-- Tambah menu lain di sini nanti --}}
+
+            {{-- CRUD Question --}}
+            <li class="nav-item">
+                <a href="{{ route('backoffice.question') }}"
+                class="nav-link sidebar-link text-white {{ request()->routeIs('backoffice.question') ? 'active-sidebar' : '' }}">
+                    
+                    <i class="bi bi-question-circle me-2"></i>
+                    Pertanyaan
+                </a>
+            </li>
         </ul>
 
         <div class="mt-auto">
@@ -83,6 +125,61 @@
 
     {{-- Bootstrap JS --}}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    {{-- sweetalert2 --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: '{{ session('success') }}',
+                confirmButtonColor: '#0d6efd',
+                timer: 2500,
+                showConfirmButton: false
+            });
+        </script>
+    @endif 
+
+    {{-- sweet alert delete --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+
+            deleteButtons.forEach(button => {
+
+                button.addEventListener('click', function (e) {
+
+                    e.preventDefault();
+
+                    const form = this.closest('form');
+                    const question = this.dataset.question;
+
+                    Swal.fire({
+                        title: 'Hapus Pertanyaan?',
+                        text: `Question "${question}" akan dihapus.`,
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#dc3545',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Ya, Hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+
+                    });
+
+                });
+
+            });
+
+        });
+    </script>
 
     @stack('scripts')
 </body>
