@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rules\Password;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -43,6 +45,7 @@ class AuthController extends Controller
                 'success' => true,
             ]);
         }
+        
         return redirect()->route('auth.login')->with('success', 'Pendaftaran berhasil! Silakan verifikasi email Anda terlebih dahulu sebelum login.');
     }
     public function login(Request $request): RedirectResponse

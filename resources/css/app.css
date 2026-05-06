@@ -10,3 +10,58 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* Register modal global styles (customizable via --register-border)
+   Example usages:
+   - Solid color: --register-border: #f1f1f1;
+   - Gradient: --register-border: linear-gradient(90deg,#ff7a18,#af002d 50%,#319197);
+*/
+:root {
+    --register-border: #e6e6e6; /* default neutral border */
+}
+
+#modalRegister .modal-dialog {
+    max-width: 640px;
+    margin: 1.75rem auto;
+}
+
+#modalRegister .modal-content {
+    position: relative;
+    border-radius: 18px;
+    border: 6px solid transparent; /* border will be drawn using background-image technique */
+    /* Use two layered backgrounds: white content and border (color or gradient from var) */
+    background-image: linear-gradient(white, white), var(--register-border);
+    background-origin: padding-box, border-box;
+    background-clip: padding-box, border-box;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(11, 22, 39, 0.12);
+}
+
+#modalRegister .modal-body {
+    padding: 2rem 2.25rem;
+}
+
+#modalRegister h3 {
+    font-size: 1.6rem;
+}
+
+#modalRegister .form-control,
+#modalRegister .form-select {
+    border-radius: 14px;
+    padding: .6rem 1rem;
+}
+
+#modalRegister .btn-dark {
+    border-radius: 999px;
+    padding: .7rem 1.25rem;
+}
+
+@media (max-width: 768px) {
+    #modalRegister .modal-dialog { max-width: 92%; margin: 1rem auto; }
+    #modalRegister .modal-content { border-width: 4px; border-radius: 14px; }
+    #modalRegister .modal-body { padding: 1.25rem; }
+}
+
+@media (max-width: 420px) {
+    #modalRegister h3 { font-size: 1.25rem; }
+}
