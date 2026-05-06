@@ -8,6 +8,43 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
+    // Tampilkan form registrasi
+    public function showRegisterForm()
+    {
+        return view('auth.register');
+    }
+
+    // Proses registrasi user baru
+    public function register(Request $request)
+    {
+
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'confirmed', Password::min(8)->mixedCase()->numbers()->symbols()],
+            'city_id' => ['nullable', 'integer', 'exists:cities,id'],
+            'gender' => ['nullable', 'in:LakiLaki,Perempuan'],
+            'birth_date' => ['nullable', 'date'],
+        ]);
+
+        $user = \App\Models\User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+            'city_id' => $validated['city_id'] ?? null,
+            'gender' => $validated['gender'] ?? null,
+            'birth_date' => $validated['birth_date'] ?? null,
+        ]);
+
+        // Jangan auto-login, instruksikan user untuk verify email dulu
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Pendaftaran berhasil! Silakan verifikasi email Anda terlebih dahulu sebelum login.',
+                'success' => true,
+            ]);
+        }
+        return redirect()->route('auth.login')->with('success', 'Pendaftaran berhasil! Silakan verifikasi email Anda terlebih dahulu sebelum login.');
+    }
     public function login(Request $request): RedirectResponse
     {
         $credentials = $request->validate([

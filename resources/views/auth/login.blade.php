@@ -94,11 +94,11 @@
                     {{-- Daftar akun --}}
                     <p class="text-center small mb-0">
                         Belum punya akun?
-                        {{-- <a href="{{ route('register') }}" 
+                        <a href="{{ route('auth.register') }}" 
                            class="text-decoration-none fw-semibold" 
                            style="color: #F5A623;">
                             Daftar
-                        </a> --}}
+                        </a>
                     </p>
                 </form>
             </div>
