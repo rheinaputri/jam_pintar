@@ -3,12 +3,20 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BackofficeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TestController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+// Compatibility route for Laravel auth middleware redirect
+// Some middleware redirects to route('login') when unauthenticated.
+// We map it to the landing page and add a query flag to trigger the modal.
+Route::get('/login', function () {
+    return redirect()->to(route('dashboard') . '?showLogin=1');
+})->name('login');
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
 
@@ -21,6 +29,14 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
 
+// ─── Student Routes (Authenticated Only) ───────────────────────────────────────
+
+Route::prefix('student')
+    ->middleware('auth')
+    ->name('student.')
+    ->group(function () {
+        Route::get('/test', [TestController::class, 'index'])->name('test');
+    });
 
 // ─── Backoffice (admin only) ───────────────────────────────────────────────────
 

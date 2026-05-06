@@ -40,12 +40,35 @@
 
             </ul>
 
-            <!-- LOGIN BUTTON -->
-            {{-- <a href="{{ route('auth.login') }}" class="btn btn-login-custom rounded-pill px-4">
-                Login
-            </a> --}}
-
-            <button type="button" class="btn btn-login-custom rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalLogin"> Login</button>
+            <!-- LOGIN BUTTON / USER PROFILE -->
+            @auth
+                <div class="dropdown">
+                    <button class="btn btn-login-custom rounded-pill px-4 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle me-2"></i>{{ auth()->user()->name ?? auth()->user()->email }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <span class="dropdown-item-text small text-muted">
+                                {{ auth()->user()->email }}
+                            </span>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="POST" action="{{ route('auth.logout') }}" class="d-inline">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            @else
+                <button type="button" class="btn btn-login-custom rounded-pill px-4" data-bs-toggle="modal"
+                    data-bs-target="#modalLogin">
+                    Login
+                </button>
+            @endauth
 
         </div>
 
