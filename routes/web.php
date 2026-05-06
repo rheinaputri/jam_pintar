@@ -5,6 +5,7 @@ use App\Http\Controllers\BackofficeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuestionController;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
@@ -29,4 +30,11 @@ Route::prefix('backoffice')
     ->name('backoffice.')
     ->group(function () {
         Route::get('/', [BackofficeController::class, 'index'])->name('index');
+        Route::get('/question', [QuestionController::class, 'index'])->name('question');
+        Route::get('/question/create', [QuestionController::class, 'create'])->name('question.create');
+        Route::post('/question', [QuestionController::class, 'store'])->name('questions.store');
+        Route::delete('/question/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
+        Route::get('/question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit');
+        Route::put('/question/{question}', [QuestionController::class, 'update'])->name('questions.update');
+        Route::get('/question/{question}', [QuestionController::class, 'show'])->name('question.show');
     });
