@@ -25,9 +25,15 @@
                 </p>
 
                 <!-- Button -->
-                <a href="#" class="btn btn-hero px-4 py-3 rounded-pill">
-                    Cari Jam Pintarku
-                </a>
+                @auth
+                    <a href="{{ route('student.test') }}" class="btn btn-hero px-4 py-3 rounded-pill">
+                        Mulai Perjalanan
+                    </a>
+                @else
+                    <button type="button" class="btn btn-hero px-4 py-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalLogin">
+                        Cari Jam Pintarku
+                    </button>
+                @endauth
 
             </div>
         </div>
@@ -192,9 +198,15 @@
                 </p>
 
                 <!-- Button -->
-                <a href="#" class="btn btn-hero px-4 py-3 rounded-pill">
-                    Mulai Perjalanan
-                </a>
+                @auth
+                    <a href="{{ route('student.test') }}" class="btn btn-hero px-4 py-3 rounded-pill">
+                        Mulai Perjalanan
+                    </a>
+                @else
+                    <button type="button" class="btn btn-hero px-4 py-3 rounded-pill" data-bs-toggle="modal" data-bs-target="#modalLogin">
+                        Mulai Perjalanan
+                    </button>
+                @endauth
             </div>
         </div>
     </section>
@@ -510,5 +522,13 @@
         }
     </style>
 
+    @if(request()->query('showLogin'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var modal = new bootstrap.Modal(document.getElementById('modalLogin'));
+            modal.show();
+        });
+    </script>
+    @endif
 
 @endsection
