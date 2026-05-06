@@ -101,9 +101,13 @@
                     {{-- Daftar akun --}}
                     <p class="text-center small mb-0">
                         Belum punya akun?
-                        <a href="{{ route('auth.register') }}" 
-                           class="text-decoration-none fw-semibold" 
-                           style="color: #F5A623;">
+                        
+                        <a href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalRegister"
+                        data-bs-dismiss="modal"
+                        class="text-decoration-none fw-semibold"
+                        style="color: #F5A623;">
                             Daftar
                         </a>
                     </p>

@@ -41,9 +41,11 @@
             </ul>
 
             <!-- LOGIN BUTTON -->
-            <a href="{{ route('auth.login') }}" class="btn btn-login-custom rounded-pill px-4">
+            {{-- <a href="{{ route('auth.login') }}" class="btn btn-login-custom rounded-pill px-4">
                 Login
-            </a>
+            </a> --}}
+
+            <button type="button" class="btn btn-login-custom rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalLogin"> Login</button>
 
         </div>
 
