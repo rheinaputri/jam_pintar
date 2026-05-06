@@ -41,7 +41,7 @@
             </ul>
 
             <!-- LOGIN BUTTON -->
-            <a href="{{ route('login') }}" class="btn btn-login-custom rounded-pill px-4">
+            <a href="{{ route('auth.login') }}" class="btn btn-login-custom rounded-pill px-4">
                 Login
             </a>
 
