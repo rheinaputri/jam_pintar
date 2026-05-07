@@ -19,7 +19,7 @@
 
                 {{-- CARD --}}
                 <div class="card-instruction-content mx-auto">
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <div class="d-flex justify-content-center gap-4 flex-wrap">
                         <div class="card instruction-card card-1">
                             <img src="{{ asset('img/instruction1.png') }}" class="card-img-top instruction-img">
                             <div class="card-body">
@@ -80,8 +80,16 @@
         .instruction-card {
             width: 17rem;
             border-radius: 12%;
+            transition: all 0.3s ease;
+            transform: scale(1);
         }
 
+        
+        .instruction-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
         .instruction-img {
             width: 40%;
             margin: 1rem auto 0 auto

@@ -56,6 +56,9 @@
             flex: 1;
             padding: 0px;
         }
+
+    
+
     </style>
 
     @stack('styles')
