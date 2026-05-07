@@ -7,6 +7,7 @@ use App\Http\Controllers\TestController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\InstructionController;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
@@ -36,7 +37,9 @@ Route::prefix('student')
     ->middleware('auth')
     ->name('student.')
     ->group(function () {
+        Route::get('/instruction', [InstructionController::class, 'index'])->name('index');
         Route::get('/test', [TestController::class, 'index'])->name('test');
+        
     });
 
 // ─── Backoffice (admin only) ───────────────────────────────────────────────────
