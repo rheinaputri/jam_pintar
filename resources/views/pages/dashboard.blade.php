@@ -26,7 +26,9 @@
 
                 <!-- Button -->
                 @auth
-                    <a href="{{ route('student.test') }}" class="btn btn-hero px-4 py-3 rounded-pill">
+                    {{-- <a href="{{ route('student.test') }}" class="btn btn-hero px-4 py-3 rounded-pill"> --}}
+                    <a href="{{ route('student.index') }}" class="btn btn-hero px-4 py-3 rounded-pill">
+
                         Mulai Perjalanan
                     </a>
                 @else
@@ -135,7 +137,7 @@
                         </div>
                     </div>
                     <div class="card time-card">
-                        <img src="{{ asset('img/time4.png') }}" class="card-img-top time-img"">
+                        <img src="{{ asset('img/time4.png') }}" class="card-img-top time-img">
                         <div class="card-body">
                             <h6 class="fw-bold">Jam Malam</h6>
                             <p class="card-text fw-medium">
