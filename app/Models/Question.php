@@ -14,12 +14,9 @@ class Question extends Model
         'answer_type',
     ];
  
-    protected function casts(): array
-    {
-        return [
-            'option' => 'array',
-        ];
-    }
+    protected $casts = [
+        'option' => 'array',
+    ];
  
     //relation
     public function answers(): HasMany

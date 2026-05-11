@@ -1,14 +1,10 @@
 <div class="modal fade" id="modalRegister" tabindex="-1" aria-labelledby="modalRegisterLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-
-            <div class="modal-header border-0">
-                <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body">
+    <div class="modal-dialog modal-dialog-centered w-100 my-4 px-3 px-sm-0" style="max-width: 550px;">
+        <div class="modal-content border-0 shadow-sm" style="border-radius: 55px; overflow: hidden;">
+            <button type="button" class="btn-close position-absolute top-0 end-0 m-4" data-bs-dismiss="modal" aria-label="Close" style="z-index: 10;"></button>
+            <div class="modal-body p-4 p-sm-5" style="background: #fff; border-radius: 32px;">
                 {{-- Header custom: judul + deskripsi --}}
-                <div class="text-start mb-3">
+                <div class="text-start mb-4">
                     <h3 class="fw-bold mb-1">Halo!</h3>
                     <p class="text-muted mb-2">Yuk, buat akunmu sekarang dan mulai jelajahi keseruan di dalamnya.</p>
                 </div>
@@ -25,16 +21,17 @@
 
                     <div class="row g-3">
                         <div class="col-md-6">
-                            <label for="name" class="form-label">Nama Lengkap</label>
+                            <label for="name" class="form-label fw-semibold small">Nama Lengkap</label>
                             <input
                                 type="text"
-                                class="form-control @error('name') is-invalid @enderror"
+                                class="form-control py-3 px-3 @error('name') is-invalid @enderror"
                                 id="name"
                                 name="name"
                                 value="{{ old('name') }}"
                                 placeholder="Masukkan Nama Lengkap"
                                 required
                                 autofocus
+                                style="border-radius: 50px; border: 1.5px solid #2A3141; font-size: 0.95rem;"
                             >
                             @error('name')
                                 <div class="invalid-feedback d-block">
@@ -43,34 +40,38 @@
                             @enderror
                         </div>
 
-                        <div class="col-md-6 position-relative">
-                            <label for="city_name" class="form-label">Asal Kota</label>
-                            <input
-                                type="text"
-                                class="form-control"
-                                id="city_name"
-                                name="city_name"
-                                value="{{ old('city_name') }}"
-                                placeholder="Ketik 2-3 huruf untuk mencari kota"
-                                autocomplete="off"
-                            >
-                            <input type="hidden" name="city_id" id="city_id" value="{{ old('city_id') }}">
-                            <div id="city_suggestions" class="list-group position-absolute" style="z-index: 2000; width: 100%; display: none;
-                                max-height: 240px; overflow:auto;
-                                top: calc(100% + .25rem); left: 0;">
+                        <div class="col-md-6">
+                            <label for="city_name" class="form-label fw-semibold small">Asal Kota</label>
+                            <div class="position-relative">
+                                <input
+                                    type="text"
+                                    class="form-control py-3 px-3"
+                                    id="city_name"
+                                    name="city_name"
+                                    value="{{ old('city_name') }}"
+                                    placeholder="Ketik 2-3 huruf untuk mencari kota"
+                                    autocomplete="off"
+                                    style="border-radius: 50px; border: 1.5px solid #2A3141; font-size: 0.95rem;"
+                                >
+                                <input type="hidden" name="city_id" id="city_id" value="{{ old('city_id') }}">
+                                <div id="city_suggestions" class="list-group position-absolute" style="z-index: 2000; width: 100%; display: none;
+                                    max-height: 240px; overflow:auto;
+                                    top: calc(100% + .25rem); left: 0;">
+                                </div>
                             </div>
                         </div>
 
                         <div class="col-12">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label fw-semibold small">Email</label>
                             <input
                                 type="email"
-                                class="form-control @error('email') is-invalid @enderror"
+                                class="form-control py-3 px-3 @error('email') is-invalid @enderror"
                                 id="email"
                                 name="email"
                                 value="{{ old('email') }}"
                                 placeholder="Masukkan Email"
                                 required
+                                style="border-radius: 50px; border: 1.5px solid #2A3141; font-size: 0.95rem;"
                             >
                             @error('email')
                                 <div class="invalid-feedback d-block">
@@ -80,30 +81,31 @@
                         </div>
 
                         <div class="col-12">
-                            <label class="form-label">Jenis Kelamin</label>
+                            <label class="form-label fw-semibold small">Jenis Kelamin</label>
                             <div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="gender" id="gender_m" value="LakiLaki" {{ old('gender')=='LakiLaki' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="gender_m">Laki-Laki</label>
+                                    <label class="form-check-label small" for="gender_m">Laki-Laki</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="gender" id="gender_f" value="Perempuan" {{ old('gender')=='Perempuan' ? 'checked' : '' }}>
-                                    <label class="form-check-label" for="gender_f">Perempuan</label>
+                                    <label class="form-check-label small" for="gender_f">Perempuan</label>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label fw-semibold small">Password</label>
                             <input
                                 type="password"
-                                class="form-control @error('password') is-invalid @enderror"
+                                class="form-control py-3 px-3 @error('password') is-invalid @enderror"
                                 id="password"
                                 name="password"
                                 placeholder="Minimal 8 karakter"
                                 minlength="8"
                                 required
                                 aria-describedby="passwordHelp"
+                                style="border-radius: 50px; border: 1.5px solid #2A3141; font-size: 0.95rem;"
                             >
                             <div id="passwordHelp" class="form-text small text-muted">Minimal 8 karakter, gunakan kombinasi huruf besar/kecil, angka, dan simbol.</div>
                             @error('password')
@@ -120,14 +122,15 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                            <label for="password_confirmation" class="form-label fw-semibold small">Konfirmasi Password</label>
                             <input
                                 type="password"
-                                class="form-control @error('password') is-invalid @enderror"
+                                class="form-control py-3 px-3 @error('password') is-invalid @enderror"
                                 id="password_confirmation"
                                 name="password_confirmation"
                                 placeholder="Ulangi Password"
                                 required
+                                style="border-radius: 50px; border: 1.5px solid #2A3141; font-size: 0.95rem;"
                             >
                             @error('password')
                                 <div class="invalid-feedback d-block">
@@ -137,32 +140,33 @@
                         </div>
 
                         <div class="col-12">
-                            <label for="birth_date" class="form-label">Tanggal Lahir</label>
+                            <label for="birth_date" class="form-label fw-semibold small">Tanggal Lahir</label>
                             <input
                                 type="date"
-                                class="form-control"
+                                class="form-control py-3 px-3"
                                 id="birth_date"
                                 name="birth_date"
                                 value="{{ old('birth_date') }}"
                                 placeholder="mm/dd/yyyy"
+                                style="border-radius: 50px; border: 1.5px solid #2A3141; font-size: 0.95rem;"
                             >
                         </div>
 
                         <div class="col-12">
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-dark">
+                                <button type="submit" class="btn py-3 fw-semibold text-white"
+                                        style="border-radius: 50px; background: #1a1a2e; font-size: 0.95rem;">
                                     Daftar
                                 </button>
                             </div>
                         </div>
 
-                        <div class="col-12 text-center mt-2">
-                            Sudah punya akun? <a href="#" data-bs-toggle="modal" data-bs-target="#modalLogin" data-bs-dismiss="modal">Masuk</a>
+                        <div class="col-12 text-center">
+                            <p class="small mb-0">Sudah punya akun? <a href="#" class="text-decoration-none fw-semibold" style="color: #F5A623;" data-bs-toggle="modal" data-bs-target="#modalLogin" data-bs-dismiss="modal">Masuk</a></p>
                         </div>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
@@ -181,7 +185,7 @@
                 </div>
                 <h4 class="fw-bold mb-2">Berhasil!</h4>
                 <p class="text-muted mb-0">
-                    Pendaftaran berhasil! Akun anda telah terdaftar. Silahkan masuk.
+                    Pendaftaran berhasil! Silakan verifikasi email Anda terlebih dahulu sebelum login.
                 </p>
                 <div class="d-grid mt-4">
                     <a href="#" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modalLogin" data-bs-dismiss="modal">Masuk Sekarang</a>
@@ -202,31 +206,6 @@
 @endif
 
 <style>
-/* Modal Register and Success styling */
-#modalRegister .modal-content,
-#modalRegisterSuccess .modal-content {
-    border-radius: 40px;
-    border: none;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-}
-
-#modalRegister .modal-dialog,
-#modalRegisterSuccess .modal-dialog {
-    max-width: 550px;
-}
-
-/* Input fields styling */
-#modalRegister .form-control,
-#modalRegister .form-check-input,
-#modalRegister button.btn {
-    border-radius: 18px;
-}
-
-#modalRegister .form-control:focus {
-    border-color: #80bdff;
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-}
-
 /* Password rules animation - collapse space when hidden */
 #passwordRules{
     opacity: 0;
