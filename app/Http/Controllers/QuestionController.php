@@ -27,7 +27,7 @@ class QuestionController extends Controller
         $validatedData = $request->validate([
             'question_text' => 'required|string',
 
-            'question_type' => 'required|in:test,rating,kuisioner,feedback,post_test',
+            'question_type' => 'required|in:kuisioner,feedback',
 
             'option' => 'nullable|string',
 
@@ -69,7 +69,7 @@ class QuestionController extends Controller
     {
         $validated = $request->validate([
             'question_text' => 'required',
-            'question_type' => 'required|in:test,rating,kuisioner,feedback,post_test',
+            'question_type' => 'required|in:kuisioner,feedback',
             'answer_type' => 'required|in:choice,essay',
             'option' => 'nullable|string',
         ]);

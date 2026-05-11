@@ -28,20 +28,28 @@ class Question extends Model
     }
 
     //helper
-    public function isTest(): bool
+    public function isKuisioner(): bool
     {
-        return $this->question_type === 'test';
+        return $this->question_type === 'kuisioner';
     }
+    public function isFeedback(): bool
+    {
+        return $this->question_type === 'feedback';
+    }
+    // public function isTest(): bool
+    // {
+    //     return $this->question_type === 'test';
+    // }
  
-    public function isRating(): bool
-    {
-        return $this->question_type === 'rating';
-    }
+    // public function isRating(): bool
+    // {
+    //     return $this->question_type === 'rating';
+    // }
  
-    public function isPostTest(): bool
-    {
-        return $this->question_type === 'post_test';
-    }
+    // public function isPostTest(): bool
+    // {
+    //     return $this->question_type === 'post_test';
+    // }
  
     public function isChoice(): bool
     {
