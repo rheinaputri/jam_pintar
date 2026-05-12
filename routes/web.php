@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BackofficeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Api\TestSubmissionController;
+use App\Http\Controllers\Api\CityController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
@@ -39,8 +41,14 @@ Route::prefix('student')
     ->group(function () {
         Route::get('/instruction', [InstructionController::class, 'index'])->name('index');
         Route::get('/test', [TestController::class, 'index'])->name('test');
-        
+        Route::post('/test/submit', [TestSubmissionController::class, 'submit'])->name('test.submit');
+        Route::get('/test/attempts', [TestSubmissionController::class, 'getUserAttempts'])->name('test.attempts');
+        Route::get('/test/attempts/{attemptId}', [TestSubmissionController::class, 'getAttemptDetails'])->name('test.attempt.detail');
     });
+
+// Public routes
+Route::get('/cities/search', [CityController::class, 'searchCity'])->name('cities.search');
+Route::get('/cities', [CityController::class, 'index'])->name('cities.index');
 
 // ─── Backoffice (admin only) ───────────────────────────────────────────────────
 
