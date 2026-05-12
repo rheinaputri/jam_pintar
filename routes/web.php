@@ -8,6 +8,8 @@ use App\Http\Controllers\Api\TestSubmissionController;
 use App\Http\Controllers\Api\CityController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\InstructionController;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
@@ -37,6 +39,7 @@ Route::prefix('student')
     ->middleware('auth')
     ->name('student.')
     ->group(function () {
+        Route::get('/instruction', [InstructionController::class, 'index'])->name('index');
         Route::get('/test', [TestController::class, 'index'])->name('test');
         Route::post('/test/submit', [TestSubmissionController::class, 'submit'])->name('test.submit');
         Route::get('/test/attempts', [TestSubmissionController::class, 'getUserAttempts'])->name('test.attempts');
@@ -54,4 +57,11 @@ Route::prefix('backoffice')
     ->name('backoffice.')
     ->group(function () {
         Route::get('/', [BackofficeController::class, 'index'])->name('index');
+        Route::get('/question', [QuestionController::class, 'index'])->name('question');
+        Route::get('/question/create', [QuestionController::class, 'create'])->name('question.create');
+        Route::post('/question', [QuestionController::class, 'store'])->name('questions.store');
+        Route::delete('/question/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
+        Route::get('/question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit');
+        Route::put('/question/{question}', [QuestionController::class, 'update'])->name('questions.update');
+        Route::get('/question/{question}', [QuestionController::class, 'show'])->name('question.show');
     });
