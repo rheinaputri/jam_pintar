@@ -560,10 +560,22 @@
         .then(data => {
             console.log('API Success:', data);
             if (data.success) {
-                showModal('Berhasil', 'Test berhasil diserahkan! Terima kasih.', 'OK', function() {
+                // showModal('Berhasil', 'Test berhasil diserahkan! Terima kasih.', 'OK', function() {
                     // Redirect setelah modal ditutup
-                    window.location.href = '{{ route("dashboard") }}';
-                });
+                    // window.location.href = '{{ route("dashboard") }}';
+                    // redirect ke halaman hasil rekomendasi untuk test attempt yang baru saja dibuat
+                    
+                // });
+                showModal(
+                    'Berhasil',
+                    'Test berhasil diserahkan! Terima kasih.',
+                    'OK',
+                    function() {
+
+                        window.location.href = `/result/${data.attempt_id}`;
+
+                    }
+                );
             } else {
                 showModal('Error', data.message || 'Terjadi kesalahan saat submit test', 'OK');
             }

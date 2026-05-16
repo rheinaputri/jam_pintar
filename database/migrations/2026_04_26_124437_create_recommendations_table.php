@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('recommendations', function (Blueprint $table) {
             $table->id();
-            $table->enum('chronotype', ['lion', 'bear', 'wolf', 'dolphin']);
+            $table->enum('prefered_study_time', ['Morning', 'Afternoon', 'Evening', 'Night']);
             $table->text('recomendation');
             $table->time('study_hour_start');
             $table->time('study_hour_end');

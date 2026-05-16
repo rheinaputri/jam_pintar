@@ -12,7 +12,7 @@ class RecommendationSeeder extends Seeder
     {
         DB::table('recommendations')->insert([
             [
-                'chronotype'           => 'lion',
+                'prefered_study_time'           => 'Morning',
                 'recomendation'        => 'Belajar paling efektif pada pagi hari sekitar pukul 05:30–07:30',
                 'study_hour_start'     => '05:30:00',
                 'study_hour_end'       => '07:30:00',
@@ -22,7 +22,7 @@ class RecommendationSeeder extends Seeder
                 'updated_at'           => now(),
             ],
             [
-                'chronotype'           => 'bear',
+                'prefered_study_time'           => 'Afternoon',
                 'recomendation'        => 'Belajar optimal pada siang hingga sore hari sekitar pukul 13:00–15:00',
                 'study_hour_start'     => '13:00:00',
                 'study_hour_end'       => '15:00:00',
@@ -32,7 +32,7 @@ class RecommendationSeeder extends Seeder
                 'updated_at'           => now(),
             ],
             [
-                'chronotype'           => 'wolf',
+                'prefered_study_time'           => 'Evening',
                 'recomendation'        => 'Belajar optimal pada malam hari sekitar pukul 20:00–22:00',
                 'study_hour_start'     => '20:00:00',
                 'study_hour_end'       => '22:00:00',
@@ -42,7 +42,7 @@ class RecommendationSeeder extends Seeder
                 'updated_at'           => now(),
             ],
             [
-                'chronotype'           => 'dolphin',
+                'prefered_study_time'           => 'Night',
                 'recomendation'        => 'Belajar dalam sesi pendek dengan jeda karena pola fokus tidak stabil',
                 'study_hour_start'     => '07:00:00',
                 'study_hour_end'       => '09:00:00',
