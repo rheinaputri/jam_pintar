@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Recommendation extends Model
 {
     protected $fillable = [
-        'chronotype',
+        'prefered_study_time',
         'recomendation',
         'study_hour_start',
         'study_hour_end',

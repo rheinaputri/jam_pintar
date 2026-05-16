@@ -10,6 +10,8 @@ use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\InstructionController;
+use App\Http\Controllers\ResultController;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
@@ -41,14 +43,11 @@ Route::prefix('student')
     ->group(function () {
         Route::get('/instruction', [InstructionController::class, 'index'])->name('index');
         Route::get('/test', [TestController::class, 'index'])->name('test');
-        Route::post('/test/submit', [TestSubmissionController::class, 'submit'])->name('test.submit');
-        Route::get('/test/attempts', [TestSubmissionController::class, 'getUserAttempts'])->name('test.attempts');
-        Route::get('/test/attempts/{attemptId}', [TestSubmissionController::class, 'getAttemptDetails'])->name('test.attempt.detail');
+        Route::post('/test/submit', [TestController::class, 'submit'])->name('test.submit');
     });
 
-// Public routes
-Route::get('/cities/search', [CityController::class, 'searchCity'])->name('cities.search');
-Route::get('/cities', [CityController::class, 'index'])->name('cities.index');
+// routeuntuk menampilkan hasil rekomendasi berdasarkan test attempt id
+Route::get('/result/{attemptId}', [ResultController::class, 'downloadPdf'])->name('result.pdf');
 
 // ─── Backoffice (admin only) ───────────────────────────────────────────────────
 
