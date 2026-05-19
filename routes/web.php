@@ -29,7 +29,7 @@ Route::get('/login', function () {
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    
+
     // Registrasi
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
     Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -44,6 +44,7 @@ Route::prefix('student')
         Route::get('/instruction', [InstructionController::class, 'index'])->name('index');
         Route::get('/test', [TestController::class, 'index'])->name('test');
         Route::post('/test/submit', [TestController::class, 'submit'])->name('test.submit');
+
     });
 
 // routeuntuk menampilkan hasil rekomendasi berdasarkan test attempt id

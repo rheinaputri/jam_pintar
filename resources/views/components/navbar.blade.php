@@ -84,6 +84,8 @@
         font-weight: 500;
         transition: all 0.25s ease;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
     }
 
     .btn-login-custom:hover {
@@ -100,9 +102,10 @@
     }
 
     .navbar {
-        position: sticky;
+        position: fixed;
         top: 0;
         z-index: 999;
+        width: 100%;
     }
 
     .nav-link-custom {
@@ -125,7 +128,7 @@
     @media (max-width: 992px) {
         .btn-login-custom {
             margin-top: 0.5rem;
-            width: fit-content;
+            width: 100%;
         }
     }
 </style>
