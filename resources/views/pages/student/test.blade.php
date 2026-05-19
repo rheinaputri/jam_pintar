@@ -32,7 +32,11 @@
                     <div class="question-card">
                         {{-- Question Text --}}
                         <h2 class="fw-bold fs-5 mb-4" id="questionText">
-                            {{ $questions[0]->question_text }}
+                            @if($questions && count($questions) > 0)
+                                {{ $questions[0]->question_text }}
+                            @else
+                                Tidak ada pertanyaan tersedia
+                            @endif
                         </h2>
 
                         {{-- Answer Options --}}
@@ -138,8 +142,8 @@
     .modal-icon {
         width: 70px;
         height: 70px;
-        background-color: transparent;
-        border: 3px solid #38bdf8;
+        background-color: #ffffff;
+        border: 3px solid #ffffff;
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -148,7 +152,7 @@
     }
 
     .modal-icon svg {
-        color: #38bdf8;
+        color: #000000;
     }
 
     .modal-title {
@@ -358,6 +362,7 @@
 <script>
     const questions = @json($questions);
     const totalQuestions = {{ $totalQuestions }};
+    const userId = {{ Auth::check() ? Auth::user()->id : 'null' }};  // ← User ID dari Blade
     let currentQuestion = 0;
     let answers = {};
     let modalCallback = null;
@@ -516,10 +521,68 @@
             return;
         }
 
-        // Show success modal
-        showModal('Berhasil', 'Test berhasil diserahkan! Terima kasih.', 'OK', function() {
-            // Redirect atau action setelah modal ditutup
-            window.location.href = '{{ route("dashboard") }}';
+        // Ubah format jawaban dari {question_id: answer} ke API format
+        const formattedAnswers = {};
+        Object.keys(answers).forEach(questionId => {
+            formattedAnswers[questionId] = answers[questionId];
+        });
+
+        // Debug log
+        console.log('Submitting test with:', {
+            userId: userId,
+            answerCount: Object.keys(formattedAnswers).length,
+            csrfToken: document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') ? '✓' : '✗'
+        });
+
+        // Kirim ke web route dengan CSRF protection
+        fetch('/student/test/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json',
+            },
+            credentials: 'include',  // ← PENTING: Kirim session cookies
+            body: JSON.stringify({
+                user_id: userId,  // ← Kirim user_id dari Blade
+                answers: formattedAnswers
+            })
+        })
+        .then(response => {
+            console.log('API Response status:', response.status);
+            if (!response.ok) {
+                return response.json().then(data => {
+                    throw new Error(data.message || `HTTP error! status: ${response.status}`);
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('API Success:', data);
+            if (data.success) {
+                // showModal('Berhasil', 'Test berhasil diserahkan! Terima kasih.', 'OK', function() {
+                    // Redirect setelah modal ditutup
+                    // window.location.href = '{{ route("dashboard") }}';
+                    // redirect ke halaman hasil rekomendasi untuk test attempt yang baru saja dibuat
+                    
+                // });
+                showModal(
+                    'Berhasil',
+                    'Test berhasil diserahkan! Terima kasih.',
+                    'OK',
+                    function() {
+
+                        window.location.href = `/result/${data.attempt_id}`;
+
+                    }
+                );
+            } else {
+                showModal('Error', data.message || 'Terjadi kesalahan saat submit test', 'OK');
+            }
+        })
+        .catch(error => {
+            console.error('Fetch Error:', error);
+            showModal('Error', 'Terjadi kesalahan: ' + error.message, 'OK');
         });
     }
 </script>

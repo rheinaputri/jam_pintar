@@ -43,7 +43,7 @@
                         Feedback
                     </option>
 
-                    <option value="test"
+                    {{-- <option value="test"
                         {{ $question->question_type == 'test' ? 'selected' : '' }}>
                         Test
                     </option>
@@ -56,7 +56,7 @@
                     <option value="post_test"
                         {{ $question->question_type == 'post_test' ? 'selected' : '' }}>
                         Post Test
-                    </option>
+                    </option> --}}
                 </select>
             </div>
 

@@ -4,10 +4,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BackofficeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\Api\TestSubmissionController;
+use App\Http\Controllers\Api\CityController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\InstructionController;
+use App\Http\Controllers\ResultController;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
@@ -39,7 +43,12 @@ Route::prefix('student')
     ->group(function () {
         Route::get('/instruction', [InstructionController::class, 'index'])->name('index');
         Route::get('/test', [TestController::class, 'index'])->name('test');
+        Route::post('/test/submit', [TestController::class, 'submit'])->name('test.submit');
+
     });
+
+// routeuntuk menampilkan hasil rekomendasi berdasarkan test attempt id
+Route::get('/result/{attemptId}', [ResultController::class, 'downloadPdf'])->name('result.pdf');
 
 // ─── Backoffice (admin only) ───────────────────────────────────────────────────
 
