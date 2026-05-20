@@ -17,4 +17,11 @@ class City extends Model
         'lat',
         'lon',
     ];
+
+    protected $table = 'cities';
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class, 'city_id');
+    }
 }

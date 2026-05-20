@@ -52,6 +52,12 @@
                                 {{ auth()->user()->email }}
                             </span>
                         </li>
+                        {{-- bagian untuk menuju profil --}}
+                        <li>
+                            <a class="dropdown-item" href="{{ route('student.profile') }}">
+                                <i class="bi bi-person me-2"></i>Profile
+                            </a>
+                        </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
                             <form method="POST" action="{{ route('auth.logout') }}" class="d-inline">

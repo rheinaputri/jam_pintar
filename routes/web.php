@@ -12,6 +12,7 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\InstructionController;
 use App\Http\Controllers\ResultController;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Controllers\ProfileController;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
@@ -44,7 +45,9 @@ Route::prefix('student')
         Route::get('/instruction', [InstructionController::class, 'index'])->name('index');
         Route::get('/test', [TestController::class, 'index'])->name('test');
         Route::post('/test/submit', [TestController::class, 'submit'])->name('test.submit');
-
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+        // try and eror route untuk google calendar
+        Route::get('/calendar/{result}', [ResultController::class, 'googleCalendar'])->name('calendar');
     });
 
 // routeuntuk menampilkan hasil rekomendasi berdasarkan test attempt id
