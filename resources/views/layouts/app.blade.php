@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,10 +20,16 @@
         body {
             min-height: 100vh;
             background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
         }
 
-        /* Sidebar */
-        #sidebar {
+        h1,h2,h3,h4,h5 {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.5px;
+        }
+
+        /* navbar */
+        #navbar {
             width: 250px;
             min-height: 100vh;
             position: fixed;
@@ -32,26 +39,25 @@
             background-color: #212529;
         }
 
-        /* Main content geser sesuai lebar sidebar */
+        /* Main content geser sesuai lebar navbar */
         #main-wrapper {
-            margin-left: 250px;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
         #content {
             flex: 1;
-            padding: 24px;
+            padding: 0px;
         }
     </style>
 
     @stack('styles')
 </head>
+
 <body>
 
-    {{-- Sidebar --}}
-    @include('components.sidebar')
+    {{-- navbar --}}
+    @include('components.navbar')
 
     <div id="main-wrapper">
         {{-- Header --}}
@@ -76,4 +82,5 @@
 
     @stack('scripts')
 </body>
+
 </html>

@@ -15,18 +15,25 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
 
             <!-- NAV MENU -->
-            <ul class="navbar-nav nav-underline align-items-center me-3">
+            <ul class="navbar-nav align-items-center me-5 mx-2">
 
-                <!-- Home (ACTIVE) -->
+                <!-- Home -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ url('/') }}" style="color:#2A3141;">
+                    <a class="nav-link mx-2 nav-link-custom active" href="#home">
                         Home
                     </a>
                 </li>
 
-                <!-- About (NOT active) -->
+                <!-- How It Works -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#about" style="color:#2A3141;">
+                    <a class="nav-link mx-2 nav-link-custom" href="#method">
+                        Steps
+                    </a>
+                </li>
+
+                <!-- About -->
+                <li class="nav-item">
+                    <a class="nav-link mx-2 nav-link-custom" href="#about">
                         About
                     </a>
                 </li>
@@ -34,7 +41,11 @@
             </ul>
 
             <!-- LOGIN BUTTON -->
-<button type="button" class="btn btn-login-custom rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalLogin"> Login</button>
+            {{-- <a href="{{ route('auth.login') }}" class="btn btn-login-custom rounded-pill px-4">
+                Login
+            </a> --}}
+
+            <button type="button" class="btn btn-login-custom rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalLogin"> Login</button>
 
         </div>
 
@@ -42,8 +53,6 @@
 </nav>
 
 <style>
-    
-
     /* Login Button - hover jadi putih dengan outline gelap */
     .btn-login-custom {
         background-color: #212529;
@@ -51,7 +60,7 @@
         border: 1.5px solid #212529;
         font-weight: 500;
         transition: all 0.25s ease;
-        box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
     }
 
     .btn-login-custom:hover {
@@ -63,8 +72,30 @@
     }
 
     .btn-login-custom:focus {
-        box-shadow: 0 0 0 3px rgba(33,37,41,0.25);
+        box-shadow: 0 0 0 3px rgba(33, 37, 41, 0.25);
         outline: none;
+    }
+
+    .navbar {
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
+
+    .nav-link-custom {
+        color: #2A3141;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    .nav-link-custom.active {
+        font-weight: 500;
+        /* bukan bold */
+    }
+
+    .nav-link-custom:hover {
+        opacity: 0.7;
     }
 
     /* Responsive adjustment */
