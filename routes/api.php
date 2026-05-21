@@ -15,5 +15,7 @@ use App\Http\Controllers\Api\CityController;
 |
 */
 
-Route::get('/cities', [CityController::class, 'index']);
-Route::get('/cities/search', [CityController::class, 'searchCity']);
+// NOTE: Test submission and public endpoints moved to routes/web.php
+
+// City search endpoints
+Route::get('/cities/search', [CityController::class, 'index']);
