@@ -9,6 +9,9 @@
         background-color: #FDC334;
     }
 
+    .container {
+        padding-top: 85px;
+    }
     /* =========================
         PROFILE HEADER
     ========================== */
@@ -192,7 +195,7 @@
 }
 </style>
 
-<div class="container py-4">
+<div class="container pb-3">
 
     {{-- PROFILE HEADER --}}
     <div class="card shadow-sm profile-card border-0">
