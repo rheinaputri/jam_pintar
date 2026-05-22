@@ -15,3 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 // NOTE: Test submission and public endpoints moved to routes/web.php
+
+// City search endpoints
+Route::get('/cities/search', [CityController::class, 'index']);
