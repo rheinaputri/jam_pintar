@@ -13,6 +13,7 @@ use App\Http\Controllers\InstructionController;
 use App\Http\Controllers\ResultController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ForgotPasswordController;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
@@ -26,6 +27,18 @@ Route::get('/login', function () {
 })->name('login');
 
 // ─── Auth ─────────────────────────────────────────────────────────────────────
+// forget password
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showForgotForm'])
+    ->name('password.request');
+
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+    ->name('password.email');
+
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])
+    ->name('password.reset');
+
+Route::post('/reset-password', [ForgotPasswordController::class, 'reset'])
+    ->name('password.update');
 
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
