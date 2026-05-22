@@ -24,8 +24,8 @@
                     Lewat kuis seru, kami bantu kamu kenali ritme belajarmu!
                 </p>
 
-                <!-- Button -->
-                <a href="#" class="btn btn-hero px-4 py-3 rounded-pill">
+                {{-- button --}}
+                <a href="{{ route('student.test') }}" class="btn btn-hero px-4 py-3 rounded-pill">
                     Cari Jam Pintarku
                 </a>
 
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="card time-card">
-                        <img src="{{ asset('img/time4.png') }}" class="card-img-top time-img"">
+                        <img src="{{ asset('img/time4.png') }}" class="card-img-top time-img">
                         <div class="card-body">
                             <h6 class="fw-bold">Jam Malam</h6>
                             <p class="card-text fw-medium">
@@ -192,9 +192,16 @@
                 </p>
 
                 <!-- Button -->
-                <a href="#" class="btn btn-hero px-4 py-3 rounded-pill">
+                {{-- @auth --}}
+
+                <a class="btn btn-hero px-4 py-3 rounded-pill" href="#home">
                     Mulai Perjalanan
                 </a>
+                {{-- @else --}}
+                {{-- <button type="button" class="btn btn-hero px-4 py-3 rounded-pill"  href="#home">
+                        Mulai Perjalanan
+                    </button> --}}
+                {{-- @endauth --}}
             </div>
         </div>
     </section>
@@ -510,5 +517,13 @@
         }
     </style>
 
+    @if (request()->query('showLogin'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var modal = new bootstrap.Modal(document.getElementById('modalLogin'));
+                modal.show();
+            });
+        </script>
+    @endif
 
 @endsection

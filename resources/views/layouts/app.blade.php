@@ -17,10 +17,17 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        /* Ensure the page fills viewport so footer can stick to bottom */
+        html, body {
+            height: 100%;
+        }
+
         body {
-            min-height: 100vh;
+            min-height: 100%;
             background-color: #f8f9fa;
             font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
         }
 
         h1,h2,h3,h4,h5 {
@@ -39,16 +46,21 @@
             background-color: #212529;
         }
 
-        /* Main content geser sesuai lebar navbar */
+        /* Main content wrapper: make full height so footer stays at bottom */
         #main-wrapper {
             display: flex;
             flex-direction: column;
+            min-height: 100vh; /* ensures wrapper spans viewport */
         }
 
+        /* content grows to fill available space */
         #content {
             flex: 1;
             padding: 0px;
         }
+
+    
+
     </style>
 
     @stack('styles')

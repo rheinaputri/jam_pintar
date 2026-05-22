@@ -40,12 +40,41 @@
 
             </ul>
 
-            <!-- LOGIN BUTTON -->
-            {{-- <a href="{{ route('auth.login') }}" class="btn btn-login-custom rounded-pill px-4">
-                Login
-            </a> --}}
-
-            <button type="button" class="btn btn-login-custom rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalLogin"> Login</button>
+            <!-- LOGIN BUTTON / USER PROFILE -->
+            @auth
+                <div class="dropdown">
+                    <button class="btn btn-login-custom rounded-pill px-4 dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-person-circle me-2"></i>{{ auth()->user()->name ?? auth()->user()->email }}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <span class="dropdown-item-text small text-muted">
+                                {{ auth()->user()->email }}
+                            </span>
+                        </li>
+                        {{-- bagian untuk menuju profil --}}
+                        <li>
+                            <a class="dropdown-item" href="{{ route('student.profile') }}">
+                                <i class="bi bi-person me-2"></i>Profile
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <form method="POST" action="{{ route('auth.logout') }}" class="d-inline">
+                                @csrf
+                                <button type="submit" class="dropdown-item text-danger">
+                                    <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            @else
+                <button type="button" class="btn btn-login-custom rounded-pill px-4" data-bs-toggle="modal"
+                    data-bs-target="#modalLogin">
+                    Login
+                </button>
+            @endauth
 
         </div>
 
@@ -61,6 +90,8 @@
         font-weight: 500;
         transition: all 0.25s ease;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+        font-size: 1rem;
+        padding: 0.7rem 1.5rem;
     }
 
     .btn-login-custom:hover {
@@ -77,9 +108,10 @@
     }
 
     .navbar {
-        position: sticky;
+        position: fixed;
         top: 0;
         z-index: 999;
+        width: 100%;
     }
 
     .nav-link-custom {
@@ -102,7 +134,7 @@
     @media (max-width: 992px) {
         .btn-login-custom {
             margin-top: 0.5rem;
-            width: fit-content;
+            width: 100%;
         }
     }
 </style>
