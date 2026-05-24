@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\CityController as BackofficeCityController;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
@@ -86,4 +87,13 @@ Route::prefix('backoffice')
         Route::get('/question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit');
         Route::put('/question/{question}', [QuestionController::class, 'update'])->name('questions.update');
         Route::get('/question/{question}', [QuestionController::class, 'show'])->name('question.show');
+
+        // Cities Routes
+        Route::get('/cities', [BackofficeCityController::class, 'index'])->name('cities');
+        Route::get('/cities/create', [BackofficeCityController::class, 'create'])->name('cities.create');
+        Route::post('/cities', [BackofficeCityController::class, 'store'])->name('cities.store');
+        Route::get('/cities/{city}', [BackofficeCityController::class, 'show'])->name('cities.show');
+        Route::get('/cities/{city}/edit', [BackofficeCityController::class, 'edit'])->name('cities.edit');
+        Route::put('/cities/{city}', [BackofficeCityController::class, 'update'])->name('cities.update');
+        Route::delete('/cities/{city}', [BackofficeCityController::class, 'destroy'])->name('cities.destroy');
     });
