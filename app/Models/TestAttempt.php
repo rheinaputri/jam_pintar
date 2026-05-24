@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Jobs\SendFeedbackInvitationEmail;
 
 class TestAttempt extends Model
 {
@@ -21,6 +22,19 @@ class TestAttempt extends Model
             'started_at'  => 'datetime',
             'finished_at' => 'datetime',
         ];
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Ketika test attempt selesai (finished_at diupdate), schedule pengiriman feedback email
+        static::updated(function ($model) {
+            if ($model->wasChanged('finished_at') && $model->finished_at !== null) {
+                // Schedule job untuk mengirim email feedback setelah 7 hari
+                SendFeedbackInvitationEmail::dispatch($model)->delay(now()->addDays(7));
+            }
+        });
     }
  
     //relasi
@@ -38,6 +52,11 @@ class TestAttempt extends Model
     public function result(): HasOne
     {
         return $this->hasOne(Result::class);
+    }
+
+    public function feedbackInvitations(): HasMany
+    {
+        return $this->hasMany(FeedbackInvitation::class);
     }
 
     //helper

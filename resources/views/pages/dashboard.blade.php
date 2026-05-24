@@ -25,7 +25,7 @@
                 </p>
 
                 {{-- button --}}
-                <a href="{{ route('student.test') }}" class="btn btn-hero px-4 py-3 rounded-pill">
+                <a href="{{ route('student.index') }}" class="btn btn-hero px-4 py-3 rounded-pill">
                     Cari Jam Pintarku
                 </a>
 

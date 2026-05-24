@@ -27,6 +27,8 @@ class AuthController extends Controller
             'city_id' => ['nullable', 'integer', 'exists:cities,id'],
             'gender' => ['nullable', 'in:LakiLaki,Perempuan'],
             'birth_date' => ['nullable', 'date'],
+            'github_username' => ['required', 'string', 'max:255'],
+            'allow_feedback_emails' => ['nullable', 'boolean'],
         ]);
 
         $user = \App\Models\User::create([
@@ -36,6 +38,8 @@ class AuthController extends Controller
             'city_id' => $validated['city_id'] ?? null,
             'gender' => $validated['gender'] ?? null,
             'birth_date' => $validated['birth_date'] ?? null,
+            'github_username' => $validated['github_username'] ?? null,
+            'allow_feedback_emails' => $validated['allow_feedback_emails'] ?? true,
         ]);
 
         // Jangan auto-login, instruksikan user untuk verify email dulu
@@ -72,12 +76,17 @@ class AuthController extends Controller
                 $request->session()->put('expires_at', now()->addDays(3));
             }
 
-            // Redirect berdasarkan role
-            if (Auth::user()->isAdmin()) {
-                return redirect()->route('backoffice.index');
+            // Redirect berdasarkan role atau intended URL
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            
+            // Redirect ke halaman yang user coba akses sebelumnya (feedback, etc)
+            // Jika tidak ada, redirect sesuai role
+            if ($user->isAdmin()) {
+                return redirect()->intended(route('backoffice.index'));
             }
 
-            return redirect()->route('dashboard');
+            return redirect()->intended(route('dashboard'));
         }
 
         return back()->withErrors([
