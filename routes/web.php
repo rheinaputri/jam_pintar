@@ -14,6 +14,7 @@ use App\Http\Controllers\ResultController;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\FeedbackController;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
 
@@ -49,6 +50,10 @@ Route::prefix('auth')->name('auth.')->group(function () {
     Route::post('/register', [AuthController::class, 'register'])->name('register');
 });
 
+// ─── Feedback Routes ───────────────────────────────────────────────────────────
+Route::get('/feedback/{token}', [FeedbackController::class, 'showForm'])->middleware('auth')->name('feedback.form');  // Require auth
+Route::post('/feedback/{token}', [FeedbackController::class, 'submitFeedback'])->middleware('auth')->name('feedback.submit');
+
 // ─── Student Routes (Authenticated Only) ───────────────────────────────────────
 
 Route::prefix('student')
@@ -59,6 +64,7 @@ Route::prefix('student')
         Route::get('/test', [TestController::class, 'index'])->name('test');
         Route::post('/test/submit', [TestController::class, 'submit'])->name('test.submit');
         Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+        Route::get('/feedback/reminders', [FeedbackController::class, 'listPendingReminders'])->name('feedback.reminders');
         // try and eror route untuk google calendar
         Route::get('/calendar/{result}', [ResultController::class, 'googleCalendar'])->name('calendar');
     });
