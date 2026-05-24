@@ -73,6 +73,11 @@
         .active-sidebar i {
             font-weight: 700;
         }
+        /* Prevent unexpectedly large icon rendering (diagnostic quick-fix) */
+        .bi {
+            font-size: 1rem !important;
+            line-height: 1;
+        }
     </style>
 
     @stack('styles')
@@ -102,6 +107,16 @@
                     
                     <i class="bi bi-question-circle me-2"></i>
                     Pertanyaan
+                </a>
+            </li>
+
+            {{-- CRUD Cities --}}
+            <li class="nav-item">
+                <a href="{{ route('backoffice.cities') }}"
+                class="nav-link sidebar-link text-white {{ request()->routeIs('backoffice.cities*') ? 'active-sidebar' : '' }}">
+                    
+                    <i class="bi bi-geo-alt me-2"></i>
+                    Kota
                 </a>
             </li>
         </ul>
@@ -179,6 +194,57 @@
             });
 
         });
+    </script>
+    {{-- Sweet Alert Delete City --}}
+    <script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const cityButtons =
+            document.querySelectorAll('.btn-delete-city');
+
+        cityButtons.forEach(button => {
+
+            button.addEventListener('click', function(e){
+
+                e.preventDefault();
+
+                const form =
+                    this.closest('form');
+
+                const cityName =
+                    this.dataset.city;
+
+                Swal.fire({
+
+                    title:'Hapus Kota?',
+                    text:`Kota "${cityName}" akan dihapus.`,
+                    icon:'warning',
+
+                    showCancelButton:true,
+
+                    confirmButtonColor:'#dc3545',
+                    cancelButtonColor:'#6c757d',
+
+                    confirmButtonText:'Ya, Hapus!',
+                    cancelButtonText:'Batal'
+
+                }).then((result)=>{
+
+                    if(result.isConfirmed){
+
+                        form.submit();
+
+                    }
+
+                });
+
+            });
+
+        });
+
+    });
+
     </script>
 
     @stack('scripts')
