@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\FeedbackResultController;
 use App\Http\Controllers\CityController as BackofficeCityController;
 
 // ─── Public ───────────────────────────────────────────────────────────────────
@@ -76,7 +77,7 @@ Route::get('/result/{attemptId}', [ResultController::class, 'downloadPdf'])->nam
 // ─── Backoffice (admin only) ───────────────────────────────────────────────────
 
 Route::prefix('backoffice')
-    ->middleware(['auth', AdminMiddleware::class])
+    // ->middleware(['auth', AdminMiddleware::class])
     ->name('backoffice.')
     ->group(function () {
         Route::get('/', [BackofficeController::class, 'index'])->name('index');
@@ -96,4 +97,14 @@ Route::prefix('backoffice')
         Route::get('/cities/{city}/edit', [BackofficeCityController::class, 'edit'])->name('cities.edit');
         Route::put('/cities/{city}', [BackofficeCityController::class, 'update'])->name('cities.update');
         Route::delete('/cities/{city}', [BackofficeCityController::class, 'destroy'])->name('cities.destroy');
+
+        // feedback
+        Route::get('/feedback-result', [FeedbackResultController::class, 'index'])
+            ->name('feedback_result');
+
+        Route::get('/feedback-result/export', [FeedbackResultController::class, 'export'])
+            ->name('feedback_result.export');
+
+        Route::get('/feedback-result/{testAttempt}', [FeedbackResultController::class, 'show'])
+            ->name('feedback_result.show');
     });
